@@ -1,0 +1,32 @@
+[
+  {
+    "slug": "ai-code-assistant",
+    "title": "AI Code Assistant",
+    "description": "A VS Code extension powered by local LLMs that provides intelligent code suggestions and refactoring assistance.",
+    "tags": ["TypeScript", "AI/ML", "VS Code API", "LLM"],
+    "featured": true,
+    "demoUrl": "",
+    "githubUrl": "#",
+    "imageUrl": ""
+  },
+  {
+    "slug": "react-component-forge",
+    "title": "React Component Forge",
+    "description": "A CLI tool for scaffolding React components with Feature Slice Design architecture and automatic test generation.",
+    "tags": ["React", "Node.js", "CLI", "FSD"],
+    "featured": true,
+    "demoUrl": "",
+    "githubUrl": "#",
+    "imageUrl": ""
+  },
+  {
+    "slug": "smart-home-dashboard",
+    "title": "Smart Home Dashboard",
+    "description": "Real-time IoT dashboard built with React and WebSockets for monitoring and controlling smart home devices.",
+    "tags": ["React", "WebSocket", "IoT", "TailwindCSS"],
+    "featured": true,
+    "demoUrl": "",
+    "githubUrl": "#",
+    "imageUrl": ""
+  }
+]

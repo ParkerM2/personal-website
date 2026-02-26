@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Context7__resolve-library-id",
+      "mcp__Context7__get-library-docs",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:www.shadcn.io)",
+      "WebFetch(domain:www.npmjs.com)",
+      "Bash(npm create:*)"
+    ]
+  }
+}
