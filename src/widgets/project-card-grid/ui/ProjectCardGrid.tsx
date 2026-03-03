@@ -1,5 +1,6 @@
 import type { Project } from "@/entities/project"
 import { ProjectCard } from "@/entities/project"
+import { Grid } from "@/shared/ui"
 import { useProjectCardGrid } from "../model/useProjectCardGrid"
 
 interface ProjectCardGridProps {
@@ -10,11 +11,10 @@ export function ProjectCardGrid({ projects }: ProjectCardGridProps) {
   const { projects: displayProjects } = useProjectCardGrid(projects)
 
   return (
-    <div className="p-4 text-fg-secondary">
-      [ProjectCardGrid placeholder]
+    <Grid cols={3} gap="lg">
       {displayProjects.map((project) => (
         <ProjectCard key={project.slug} project={project} />
       ))}
-    </div>
+    </Grid>
   )
 }

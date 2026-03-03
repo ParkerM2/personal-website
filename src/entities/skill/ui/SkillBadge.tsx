@@ -1,10 +1,16 @@
 import type { Skill } from "../model/types"
+import { Badge } from "@/shared/ui"
+import { cn } from "@/lib/utils"
 
 interface SkillBadgeProps {
   skill: Skill
   className?: string
 }
 
-export function SkillBadge({ skill }: SkillBadgeProps) {
-  return <div className="p-4 text-fg-secondary">[SkillBadge placeholder: {skill.name}]</div>
+export function SkillBadge({ skill, className }: SkillBadgeProps) {
+  return (
+    <Badge variant="muted" className={cn(className)}>
+      {skill.name}
+    </Badge>
+  )
 }
