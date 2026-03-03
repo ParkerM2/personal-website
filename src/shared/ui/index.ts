@@ -1,2 +1,3 @@
-// Component library barrel - components added by subsequent build tasks
-export {}
+export * from "./button"
+export * from "./badge"
+export * from "./tag"
