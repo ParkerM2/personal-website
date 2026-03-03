@@ -84,16 +84,92 @@
   }
 }
 
-/* Floating ring animation for hero background */
-@keyframes ring-float {
-  0%, 100% {
-    transform: translateY(0) scale(1);
+/* Marquee animation for tech stack */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
   }
-  50% {
-    transform: translateY(-12px) scale(1.04);
+  100% {
+    transform: translateX(-50%);
   }
 }
 
-.animate-ring-float {
-  animation: ring-float 6s ease-in-out infinite;
+.animate-marquee {
+  animation: marquee 30s linear infinite;
 }
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Neo-brutalist card scanline pattern */
+.neo-scanlines {
+  background-image: repeating-linear-gradient(
+    0deg,
+    var(--accent) 0px,
+    var(--accent) 1px,
+    transparent 1px,
+    transparent 8px
+  );
+}
+
+/* GitHub heatmap cell */
+.heatmap-cell {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+}
+
+/* Timeline hover card effect */
+.timeline-card {
+  position: relative;
+}
+
+.timeline-card .neo-shadow {
+  position: absolute;
+  inset: 0;
+  transform: translate(8px, 10px);
+  border: 3px solid var(--accent);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.timeline-card:hover .neo-shadow {
+  opacity: 1;
+}
+
+.timeline-card .corner-tick {
+  position: absolute;
+  width: 8px;
+  height: 10px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.timeline-card:hover .corner-tick {
+  opacity: 1;
+}
+
+.timeline-card .corner-tick::before,
+.timeline-card .corner-tick::after {
+  content: '';
+  position: absolute;
+  background-color: var(--accent);
+}
+
+/* Top-right tick */
+.corner-tick.tr { top: -5px; right: -4px; }
+.corner-tick.tr::before { width: 8px; height: 3px; top: 0; right: 0; }
+.corner-tick.tr::after { width: 3px; height: 10px; top: 0; right: 0; }
+
+/* Bottom-left tick */
+.corner-tick.bl { bottom: -5px; left: -4px; }
+.corner-tick.bl::before { width: 8px; height: 3px; bottom: 0; left: 0; }
+.corner-tick.bl::after { width: 3px; height: 10px; bottom: 0; left: 0; }
+
+/* Bottom-right tick */
+.corner-tick.br { bottom: -5px; right: -4px; }
+.corner-tick.br::before { width: 8px; height: 3px; bottom: 0; right: 0; }
+.corner-tick.br::after { width: 3px; height: 10px; bottom: 0; right: 0; }
