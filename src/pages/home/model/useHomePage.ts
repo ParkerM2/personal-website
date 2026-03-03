@@ -1,93 +1,81 @@
-import { useQuery } from "@tanstack/react-query"
-import { projectQueryOptions } from "@/entities/project"
 import { siteConfig } from "@/shared/config"
 
-export interface HeroStat {
-  value: string
-  label: string
-}
-
-export interface InfoCard {
-  label: string
-  items: { text: string; muted?: boolean }[]
-}
-
-export interface TechBadge {
-  name: string
-  color: string
-}
-
-export interface WritingItem {
+export interface ProjectCard {
   title: string
+  description: string
+  techTags: string
   slug: string
-  muted?: boolean
 }
 
-const heroStats: HeroStat[] = [
-  { value: "5+", label: "Years Exp." },
-  { value: "20+", label: "Projects" },
-  { value: "12", label: "Open Source" },
+export interface ArticleCard {
+  date: string
+  title: string
+  description: string
+  slug: string
+}
+
+const skillTags = ["TypeScript", "React", "Electron", "AI/ML", "Design Systems"]
+
+const projectCards: ProjectCard[] = [
+  {
+    title: "ADC Desktop",
+    description:
+      "Electron app for managing autonomous Claude coding agents with real-time task monitoring.",
+    techTags: "Electron · React · TypeScript",
+    slug: "adc-desktop",
+  },
+  {
+    title: "Workflow Engine",
+    description:
+      "Multi-agent orchestration for parallel task execution with dependency resolution and QA gates.",
+    techTags: "Node.js · AI Agents · Git",
+    slug: "workflow-engine",
+  },
+  {
+    title: "Design System",
+    description:
+      "118-component library with theme variables, responsive breakpoints, and dark/light mode.",
+    techTags: "Pencil · Components · Theming",
+    slug: "design-system",
+  },
+  {
+    title: "Hub Protocol",
+    description:
+      "Centralized API for device sync, workspace management, and real-time coordination.",
+    techTags: "REST · WebSocket · JWT",
+    slug: "hub-protocol",
+  },
 ]
 
-const infoCards: InfoCard[] = [
+const latestArticles: ArticleCard[] = [
   {
-    label: "CURRENTLY",
-    items: [
-      { text: "Building design systems in Pencil" },
-      { text: "Exploring AI-first dev workflows" },
-      { text: "Open to collaboration", muted: true },
-    ],
+    date: "Feb 2026",
+    title: "Building Multi-Agent Workflows That Actually Work",
+    description:
+      "Lessons from orchestrating parallel coding agents — dependency resolution, QA gates, and crash recovery.",
+    slug: "multi-agent-workflows",
   },
   {
-    label: "INTERESTS",
-    items: [
-      { text: "Design systems & component architecture" },
-      { text: "AI-assisted development tools" },
-      { text: "Open source tooling", muted: true },
-    ],
-  },
-]
-
-const techStack: TechBadge[] = [
-  { name: "React", color: "#61DAFB" },
-  { name: "TypeScript", color: "#3178C6" },
-  { name: "Tailwind CSS", color: "#06B6D4" },
-  { name: "Node.js", color: "#339933" },
-  { name: "Electron", color: "#47848F" },
-  { name: "Next.js", color: "#FFFFFF" },
-  { name: "TanStack", color: "#EF4444" },
-  { name: "Radix UI", color: "#AB7CFF" },
-]
-
-const latestWriting: WritingItem[] = [
-  { title: "Building AI-First Dev Workflows", slug: "ai-dev-workflows" },
-  {
-    title: "Design System Architecture at Scale",
-    slug: "building-design-system",
+    date: "Jan 2026",
+    title: "Design Systems at Scale: From Tokens to Components",
+    description:
+      "How theme variables, responsive breakpoints, and a component library come together in a real project.",
+    slug: "design-systems-at-scale",
   },
   {
-    title: "Electron + React Performance Patterns",
-    slug: "typescript-react-patterns",
-  },
-  {
-    title: "Multi-Agent Orchestration Deep Dive",
-    slug: "future-web-components",
-    muted: true,
+    date: "Dec 2025",
+    title: "Electron + React: Strict TypeScript From Day One",
+    description:
+      "Why zero-tolerance linting saved weeks of debugging in a 30k-line desktop app.",
+    slug: "electron-react-strict-typescript",
   },
 ]
 
 export function useHomePage() {
-  const { data: featuredProjects, isLoading } = useQuery(
-    projectQueryOptions.featured(),
-  )
-
   return {
-    featuredProjects: featuredProjects ?? [],
-    isLoading,
-    heroStats,
-    infoCards,
-    techStack,
-    latestWriting,
+    projectCards,
+    latestArticles,
+    skillTags,
     siteConfig,
   }
 }
