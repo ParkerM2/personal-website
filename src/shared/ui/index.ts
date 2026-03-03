@@ -1,8 +1,2 @@
-export * from "./layout"
-export * from "./clay"
-export * from "./button"
-export * from "./card"
-export * from "./typography"
-export * from "./media"
-export * from "./feedback"
-export * from "./navigation"
+// Component library barrel - components added by subsequent build tasks
+export {}
