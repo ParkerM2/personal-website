@@ -1,14 +1,38 @@
+import { Container, Grid, SectionLabel, Separator } from "@/shared/ui"
+import { ArticleCard } from "@/widgets/article-card"
 import { useBlogPage } from "../model/useBlogPage"
 
 export function BlogPage() {
-  useBlogPage()
+  const { featuredArticle, remainingArticles } = useBlogPage()
 
   return (
-    <div className="container mx-auto px-4 py-16">
-      <h1 className="text-4xl font-bold tracking-tight">Blog</h1>
-      <p className="mt-4 text-muted-foreground">
-        This page is under construction.
-      </p>
-    </div>
+    <Container size="lg" className="py-16">
+      <SectionLabel label="WRITING" title="Blog & Articles" />
+      <div className="mt-10">
+        <ArticleCard
+          title={featuredArticle.title}
+          description={featuredArticle.description}
+          date={featuredArticle.date}
+          category={featuredArticle.category}
+          readTime={featuredArticle.readTime}
+          slug={featuredArticle.slug}
+          className="col-span-full"
+        />
+      </div>
+      <Separator className="my-10" />
+      <Grid cols={3} gap="lg">
+        {remainingArticles.map((article) => (
+          <ArticleCard
+            key={article.slug}
+            title={article.title}
+            description={article.description}
+            date={article.date}
+            category={article.category}
+            readTime={article.readTime}
+            slug={article.slug}
+          />
+        ))}
+      </Grid>
+    </Container>
   )
 }
