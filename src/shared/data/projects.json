@@ -1,32 +1,92 @@
 [
   {
-    "slug": "ai-code-assistant",
-    "title": "AI Code Assistant",
-    "description": "A VS Code extension powered by local LLMs that provides intelligent code suggestions and refactoring assistance.",
-    "tags": ["TypeScript", "AI/ML", "VS Code API", "LLM"],
+    "slug": "create-claude-workflow",
+    "title": "claude-workflow",
+    "description": "Multi-agent workflow orchestration plugin for Claude Code. Branch-per-task development with specialist agents, automated QA cycles, and crash-safe JSONL progress tracking. 14 slash commands for structured feature development.",
+    "tags": ["TypeScript", "Claude Code", "Multi-Agent", "Plugin"],
     "featured": true,
     "demoUrl": "",
-    "githubUrl": "#",
+    "githubUrl": "https://github.com/ParkerM2/create-claude-workflow",
     "imageUrl": ""
   },
   {
-    "slug": "react-component-forge",
-    "title": "React Component Forge",
-    "description": "A CLI tool for scaffolding React components with Feature Slice Design architecture and automatic test generation.",
-    "tags": ["React", "Node.js", "CLI", "FSD"],
+    "slug": "agentic-desktop-command",
+    "title": "Agentic Desktop Command",
+    "description": "Full-stack multi-device workspace and project management platform. Electron 39 + React 19 with mobile, Mac, and Windows support. Uses Claude Agent Teams to automate tasks from bullet-point tickets to merged PRs.",
+    "tags": ["Electron", "React", "TypeScript", "Zustand", "Tailwind"],
     "featured": true,
     "demoUrl": "",
-    "githubUrl": "#",
+    "githubUrl": "https://github.com/ParkerM2/Agentic-Desktop-Command",
     "imageUrl": ""
   },
   {
-    "slug": "smart-home-dashboard",
-    "title": "Smart Home Dashboard",
-    "description": "Real-time IoT dashboard built with React and WebSockets for monitoring and controlling smart home devices.",
-    "tags": ["React", "WebSocket", "IoT", "TailwindCSS"],
+    "slug": "syrnia-tracker",
+    "title": "Syrnia Tracker",
+    "description": "Chrome extension for storing, formatting, analyzing, and exporting gameplay data. Fully local in-browser processing with dashboards, historical tracking, and zero external dependencies.",
+    "tags": ["TypeScript", "Chrome Extension", "Analytics", "Dashboard"],
     "featured": true,
     "demoUrl": "",
-    "githubUrl": "#",
+    "githubUrl": "https://github.com/ParkerM2/Syrnia-Tracker",
+    "imageUrl": ""
+  },
+  {
+    "slug": "pr-review-toolkit",
+    "title": "PR Review Toolkit",
+    "description": "Claude Code CLI plugin for GitHub PR listing, filtering, and multi-agent parallel review with claude-workflow integration.",
+    "tags": ["TypeScript", "Claude Code", "GitHub API", "Plugin"],
+    "featured": false,
+    "demoUrl": "",
+    "githubUrl": "https://github.com/ParkerM2/pr-review-toolkit",
+    "imageUrl": ""
+  },
+  {
+    "slug": "agentic-terminal-wrapper",
+    "title": "Agentic Terminal Wrapper",
+    "description": "Electron wrapper for Claude Code CLI with a full GUI — file explorer, split panes, project tabs, and image paste support.",
+    "tags": ["Electron", "JavaScript", "CLI", "Developer Tools"],
+    "featured": false,
+    "demoUrl": "",
+    "githubUrl": "https://github.com/ParkerM2/Agentic-Terminal-Wrapper",
+    "imageUrl": ""
+  },
+  {
+    "slug": "claude-workflow-marketplace",
+    "title": "claude-workflow Marketplace",
+    "description": "Plugin marketplace for claude-workflow — distribution and discovery hub for multi-agent workflow orchestration plugins for Claude Code.",
+    "tags": ["Claude Code", "Plugin", "Marketplace"],
+    "featured": false,
+    "demoUrl": "",
+    "githubUrl": "https://github.com/ParkerM2/claude-workflow-marketplace",
+    "imageUrl": ""
+  },
+  {
+    "slug": "gamedar",
+    "title": "GameDar",
+    "description": "Game discovery and radar app for finding new games across platforms. Live at gamedar.netlify.app.",
+    "tags": ["JavaScript", "API", "Netlify"],
+    "featured": false,
+    "demoUrl": "https://gamedar.netlify.app/",
+    "githubUrl": "https://github.com/ParkerM2/GameDar",
+    "imageUrl": ""
+  },
+  {
+    "slug": "manning-signs",
+    "title": "Manning Signs Inc.",
+    "description": "Business website built for Manning Signs Inc. Full production site at manningsigns.org.",
+    "tags": ["JavaScript", "Business", "Web Design"],
+    "featured": false,
+    "demoUrl": "https://www.manningsigns.org",
+    "githubUrl": "https://github.com/ParkerM2/ManningSignsV2",
+    "imageUrl": ""
+  },
+  {
+    "slug": "personal-website",
+    "title": "Personal Portfolio",
+    "description": "This site — built with React 19, TanStack Router, Tailwind CSS 4, and Vite. Dark bento-grid design with responsive layouts.",
+    "tags": ["React", "TypeScript", "Tailwind", "Vite"],
+    "featured": false,
+    "demoUrl": "https://parkermanning.dev",
+    "githubUrl": "https://github.com/ParkerM2/personal-website",
     "imageUrl": ""
   }
 ]

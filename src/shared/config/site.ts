@@ -1,10 +1,13 @@
 export const siteConfig = {
-  name: "Parker",
-  title: "Software Developer",
-  description: "Software Developer, Tech Enthusiast, AI Tooling Hobbyist",
-  url: "https://parkerdev.com",
-  github: "https://github.com/Parker",
-  linkedin: "#",
+  name: "Parker Manning",
+  title: "Full-Stack Developer",
+  description:
+    "Full-stack developer building AI-powered developer tooling. Currently focused on multi-agent workflow orchestration for Claude Code.",
+  url: "https://parkermanning.dev",
+  github: "https://github.com/ParkerM2",
+  linkedin: "https://linkedin.com/in/parkermanning",
   twitter: "#",
-  email: "contact@parkerdev.com",
+  email: "contact@parkermanning.dev",
+  company: "EstateSpace",
+  location: "Jax Beach, FL",
 }
