@@ -1,6 +1,9 @@
 [build]
   command = "npm run build"
   publish = "dist"
+  # Netlify deploys from this branch (set in Netlify dashboard)
+  # Production branch: production
+  # master pushes will NOT trigger a deploy — only production does
 
 [build.environment]
   NODE_VERSION = "22"
