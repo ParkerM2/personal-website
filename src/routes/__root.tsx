@@ -4,7 +4,7 @@ import { Header } from "@/widgets/header"
 import { Footer } from "@/widgets/footer"
 
 const TanStackRouterDevtools =
-  process.env.NODE_ENV === "production"
+  import.meta.env.PROD
     ? () => null
     : lazy(() =>
         import("@tanstack/react-router-devtools").then((res) => ({

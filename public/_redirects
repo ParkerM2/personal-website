@@ -1,0 +1,3 @@
+# SPA Fallback — serve index.html for all routes
+# TanStack Router handles client-side routing
+/*    /index.html   200
