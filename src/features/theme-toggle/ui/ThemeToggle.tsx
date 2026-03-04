@@ -1,24 +1,16 @@
-import { Sun, Moon, Monitor } from "lucide-react"
-import { IconButton } from "@/shared/ui"
 import { useThemeToggle } from "../model/useThemeToggle"
 
 export function ThemeToggle() {
-  const { theme, toggleTheme } = useThemeToggle()
-
-  const icon =
-    theme === "light" ? (
-      <Sun className="h-5 w-5" />
-    ) : theme === "dark" ? (
-      <Moon className="h-5 w-5" />
-    ) : (
-      <Monitor className="h-5 w-5" />
-    )
+  const { toggleTheme } = useThemeToggle()
 
   return (
-    <IconButton
-      icon={icon}
-      label="Toggle theme"
+    <button
+      type="button"
       onClick={toggleTheme}
-    />
+      className="p-2 text-fg-secondary"
+      aria-label="Toggle theme"
+    >
+      [ThemeToggle placeholder]
+    </button>
   )
 }

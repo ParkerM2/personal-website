@@ -1,33 +1,53 @@
 import { Link } from "@tanstack/react-router"
-import { Section, Stack, Heading, Text, ClayButton } from "@/shared/ui"
-import { Button } from "@/components/ui/button"
+
+import { siteConfig } from "@/shared/config"
+import { Avatar, AvatarFallback, Button } from "@/shared/ui"
+
 import { useHeroSection } from "../model/useHeroSection"
 
 export function HeroSection() {
   const { title, subtitle, ctaLinks } = useHeroSection()
+  const [primaryCta, secondaryCta] = ctaLinks
 
   return (
-    <Section clay spacing="lg" className="py-24 lg:py-32">
-      <Stack
-        spacing="lg"
-        align="start"
-        className="text-center md:text-left"
-      >
-        <Heading as="h1">{title}</Heading>
-        <Text variant="lead" className="max-w-2xl">
+    <section className="py-20 md:py-32">
+      <div className="mx-auto max-w-2xl px-6 flex flex-col items-center text-center">
+        {/* Avatar */}
+        <Avatar size={120}>
+          <AvatarFallback className="text-2xl font-bold text-fg">
+            P
+          </AvatarFallback>
+        </Avatar>
+
+        {/* Name */}
+        <h1 className="mt-6 text-3xl md:text-4xl font-bold tracking-tight text-fg">
+          {title}
+        </h1>
+
+        {/* Title */}
+        <p className="mt-2 font-mono text-accent text-sm tracking-wide">
+          {siteConfig.title}
+        </p>
+
+        {/* Bio */}
+        <p className="mt-4 text-fg-secondary text-lg leading-relaxed">
           {subtitle}
-        </Text>
-        <Stack direction="horizontal" spacing="md" className="mt-4">
-          <Link to={ctaLinks[0].href}>
-            <ClayButton size="lg">{ctaLinks[0].label}</ClayButton>
-          </Link>
-          <Link to={ctaLinks[1].href}>
-            <Button variant="outline" size="lg">
-              {ctaLinks[1].label}
+        </p>
+
+        {/* CTA buttons */}
+        <div className="mt-8 flex gap-4 justify-center flex-wrap">
+          {primaryCta !== undefined && (
+            <Button variant="primary" size="lg" asChild>
+              <Link to={primaryCta.href}>{primaryCta.label}</Link>
             </Button>
-          </Link>
-        </Stack>
-      </Stack>
-    </Section>
+          )}
+          {secondaryCta !== undefined && (
+            <Button variant="secondary" size="lg" asChild>
+              <Link to={secondaryCta.href}>{secondaryCta.label}</Link>
+            </Button>
+          )}
+        </div>
+      </div>
+    </section>
   )
 }

@@ -1,3 +1,7 @@
+import { siteConfig } from "@/shared/config"
+
 export function useContactPage() {
-  return {}
+  return {
+    email: siteConfig.email,
+  }
 }

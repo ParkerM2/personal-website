@@ -1,37 +1,30 @@
 import { Link } from "@tanstack/react-router"
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-} from "@/components/ui/sheet"
-import { siteConfig } from "@/shared/config"
 
-interface NavItem {
-  label: string
-  href: string
-}
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/shared/ui"
 
 interface MobileNavProps {
   open: boolean
   onOpenChange: (open: boolean) => void
-  items: NavItem[]
+  items: { label: string; href: string }[]
 }
 
 export function MobileNav({ open, onOpenChange, items }: MobileNavProps) {
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent side="right" className="w-72">
+      <SheetContent id="mobile-nav">
         <SheetHeader>
-          <SheetTitle>{siteConfig.name}</SheetTitle>
+          <SheetTitle className="font-mono text-accent tracking-[3px] text-sm">
+            PARKER
+          </SheetTitle>
         </SheetHeader>
-        <nav className="mt-8 flex flex-col gap-2">
+        <nav className="mt-8 flex flex-col gap-1" aria-label="Mobile navigation">
           {items.map((item) => (
             <Link
               key={item.href}
               to={item.href}
-              onClick={() => onOpenChange(false)}
-              className="rounded-lg px-4 py-3 text-base font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
+              className="block rounded-md px-3 py-3 text-sm font-medium text-fg-secondary transition-colors hover:bg-bg-elevated hover:text-fg"
+              activeProps={{ className: "text-accent bg-bg-elevated" }}
+              onClick={() => { onOpenChange(false) }}
             >
               {item.label}
             </Link>

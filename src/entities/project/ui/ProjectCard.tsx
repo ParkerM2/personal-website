@@ -1,8 +1,12 @@
 import type { Project } from "../model/types"
-import { ClayCard } from "@/shared/ui"
-import { CardContent, CardHeader, CardTitle } from "@/shared/ui"
-import { Badge } from "@/components/ui/badge"
-import { cn } from "@/lib/utils"
+import {
+  Badge,
+  Button,
+  Card,
+  CardContent,
+  CardFooter,
+} from "@/shared/ui"
+import { ExternalLink, Github } from "lucide-react"
 
 interface ProjectCardProps {
   project: Project
@@ -11,20 +15,53 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project, className }: ProjectCardProps) {
   return (
-    <ClayCard className={cn("flex flex-col", className)}>
-      <CardHeader>
-        <CardTitle className="text-lg">{project.title}</CardTitle>
-      </CardHeader>
-      <CardContent className="flex flex-1 flex-col gap-4">
-        <p className="text-sm text-muted-foreground">{project.description}</p>
-        <div className="mt-auto flex flex-wrap gap-2">
-          {project.tags.map((tag) => (
-            <Badge key={tag} variant="secondary" className="clay-sm">
-              {tag}
-            </Badge>
-          ))}
-        </div>
+    <Card className={className}>
+      <div className="h-40 rounded-t-md bg-gradient-to-br from-accent/20 to-bg-elevated" />
+      <CardContent className="pt-4">
+        <p className="text-base font-semibold text-fg">{project.title}</p>
+        <p className="mt-1 line-clamp-2 text-sm text-fg-secondary">
+          {project.description}
+        </p>
+        {project.tags.length > 0 ? (
+          <div className="mt-3 flex flex-wrap gap-1.5">
+            {project.tags.map((tag) => (
+              <Badge key={tag} variant="muted">
+                {tag}
+              </Badge>
+            ))}
+          </div>
+        ) : null}
       </CardContent>
-    </ClayCard>
+      {(project.githubUrl !== "" || project.demoUrl !== "") ? (
+        <CardFooter className="gap-2">
+          {project.githubUrl !== "" ? (
+            <Button variant="ghost" size="sm" asChild>
+              <a
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`View ${project.title} on GitHub`}
+              >
+                <Github className="mr-1.5 h-3.5 w-3.5" />
+                GitHub
+              </a>
+            </Button>
+          ) : null}
+          {project.demoUrl !== "" ? (
+            <Button variant="ghost" size="sm" asChild>
+              <a
+                href={project.demoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`View live demo of ${project.title}`}
+              >
+                <ExternalLink className="mr-1.5 h-3.5 w-3.5" />
+                Demo
+              </a>
+            </Button>
+          ) : null}
+        </CardFooter>
+      ) : null}
+    </Card>
   )
 }
