@@ -84,14 +84,40 @@
   }
 }
 
-/* Marquee animation for tech stack */
+/* ═══════════════════════════════════════════════════
+   Background Circle Animation (#1)
+   Gentle floating drift for concentric ring pairs
+   ═══════════════════════════════════════════════════ */
+
+@keyframes circle-float {
+  0%, 100% { transform: translate(-50%, -50%) translate(0, 0); }
+  25%      { transform: translate(-50%, -50%) translate(6px, -8px); }
+  50%      { transform: translate(-50%, -50%) translate(-4px, 5px); }
+  75%      { transform: translate(-50%, -50%) translate(3px, 7px); }
+}
+
+@keyframes circle-float-reverse {
+  0%, 100% { transform: translate(-50%, -50%) translate(0, 0); }
+  25%      { transform: translate(-50%, -50%) translate(-5px, 6px); }
+  50%      { transform: translate(-50%, -50%) translate(7px, -4px); }
+  75%      { transform: translate(-50%, -50%) translate(-3px, -7px); }
+}
+
+.bg-circle {
+  animation: circle-float 20s ease-in-out infinite;
+}
+
+.bg-circle-reverse {
+  animation: circle-float-reverse 24s ease-in-out infinite;
+}
+
+/* ═══════════════════════════════════════════════════
+   Marquee animation for tech stack
+   ═══════════════════════════════════════════════════ */
+
 @keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 .animate-marquee {
@@ -102,7 +128,10 @@
   animation-play-state: paused;
 }
 
-/* Neo-brutalist card scanline pattern */
+/* ═══════════════════════════════════════════════════
+   Neo-brutalist card scanline pattern
+   ═══════════════════════════════════════════════════ */
+
 .neo-scanlines {
   background-image: repeating-linear-gradient(
     0deg,
@@ -120,58 +149,29 @@
   border-radius: 2px;
 }
 
-/* Timeline hover card effect */
+/* ═══════════════════════════════════════════════════
+   Timeline hover card effect (#2 + #3)
+   - Shadow animates in from offset (not just opacity)
+   - Corner ticks removed (caused extra border artifacts)
+   ═══════════════════════════════════════════════════ */
+
 .timeline-card {
   position: relative;
-  isolation: isolate; /* creates stacking context so z-index:-1 stays visible */
+  isolation: isolate;
 }
 
 .timeline-card .neo-shadow {
   position: absolute;
   inset: 0;
-  z-index: -1; /* renders BEHIND card content, not on top */
-  transform: translate(8px, 10px);
+  z-index: -1;
   border: 3px solid var(--accent);
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.2s ease;
+  transform: translate(12px, 14px) scale(0.98);
+  transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
 .timeline-card:hover .neo-shadow {
   opacity: 1;
+  transform: translate(8px, 10px) scale(1);
 }
-
-.timeline-card .corner-tick {
-  position: absolute;
-  width: 8px;
-  height: 10px;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.timeline-card:hover .corner-tick {
-  opacity: 1;
-}
-
-.timeline-card .corner-tick::before,
-.timeline-card .corner-tick::after {
-  content: '';
-  position: absolute;
-  background-color: var(--accent);
-}
-
-/* Top-right tick */
-.corner-tick.tr { top: -5px; right: -4px; }
-.corner-tick.tr::before { width: 8px; height: 3px; top: 0; right: 0; }
-.corner-tick.tr::after { width: 3px; height: 10px; top: 0; right: 0; }
-
-/* Bottom-left tick */
-.corner-tick.bl { bottom: -5px; left: -4px; }
-.corner-tick.bl::before { width: 8px; height: 3px; bottom: 0; left: 0; }
-.corner-tick.bl::after { width: 3px; height: 10px; bottom: 0; left: 0; }
-
-/* Bottom-right tick */
-.corner-tick.br { bottom: -5px; right: -4px; }
-.corner-tick.br::before { width: 8px; height: 3px; bottom: 0; right: 0; }
-.corner-tick.br::after { width: 3px; height: 10px; bottom: 0; right: 0; }

@@ -24,7 +24,7 @@ export function HomePage() {
   } = useHomePage()
 
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative overflow-x-hidden">
       {/* ── Animated Circle Background ── */}
       <CircleBackground circles={bgCircles} />
 
@@ -108,11 +108,11 @@ export function HomePage() {
             </div>
           </div>
 
-          {/* Right Bento Cards */}
-          <div className="-mx-4 flex gap-4 overflow-x-auto px-4 pb-2 sm:-mx-6 sm:px-6 min-[1700px]:mx-0 min-[1700px]:shrink-0 min-[1700px]:overflow-visible min-[1700px]:px-0">
-            <BentoCardComponent card={currentlyCard} width="w-[300px] min-[1700px]:w-[320px]" />
+          {/* Right Bento Cards — stacks on mobile, horizontal scroll on tablet, inline on wide */}
+          <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap min-[1700px]:shrink-0 min-[1700px]:flex-nowrap">
+            <BentoCardComponent card={currentlyCard} width="w-full sm:w-[300px] min-[1700px]:w-[320px]" />
             <GitHubActivityCardComponent card={githubActivity} />
-            <BentoCardComponent card={interestsCard} width="w-[300px] min-[1700px]:w-[320px]" />
+            <BentoCardComponent card={interestsCard} width="w-full sm:w-[300px] min-[1700px]:w-[320px]" />
           </div>
         </section>
 
@@ -151,7 +151,7 @@ export function HomePage() {
    Sub-components
    ═══════════════════════════════════════════════════════ */
 
-/* ── Circle Background ── */
+/* ── Circle Background (#1 — animated floating) ── */
 
 function CircleBackground({ circles }: { circles: BgCircle[] }) {
   const designWidth = 1440
@@ -163,10 +163,14 @@ function CircleBackground({ circles }: { circles: BgCircle[] }) {
       {circles.map((c, i) => {
         const leftPercent = ((c.x + c.size / 2) / designWidth) * 100
         const topPercent = (c.y / 500) * 100
+        // Alternate between two float directions for organic movement
+        const animClass = i % 2 === 0 ? "bg-circle" : "bg-circle-reverse"
+        // Stagger animation delay based on index for variety
+        const delay = (i % 8) * 2.5
         return (
           <div
             key={i}
-            className="absolute rounded-full"
+            className={`absolute rounded-full ${animClass}`}
             style={{
               width: c.size,
               height: c.size,
@@ -178,6 +182,7 @@ function CircleBackground({ circles }: { circles: BgCircle[] }) {
                 c.color === "accent" ? "var(--accent)" : "#555555",
               opacity: c.opacity,
               transform: "translate(-50%, -50%)",
+              animationDelay: `${String(-delay)}s`,
             }}
           />
         )
@@ -233,7 +238,7 @@ function GitHubActivityCardComponent({
   card: GitHubActivityCard
 }) {
   return (
-    <div className="w-[340px] shrink-0 overflow-hidden rounded-lg border border-border bg-bg-surface min-[1700px]:w-[360px]">
+    <div className="w-full shrink-0 overflow-hidden rounded-lg border border-border bg-bg-surface sm:w-[340px] min-[1700px]:w-[360px]">
       {/* Header */}
       <div className="px-6 pb-2 pt-5">
         <span className="font-mono text-xs font-bold tracking-[3px] text-accent">
@@ -362,7 +367,7 @@ function ProjectCardComponent({ project }: { project: ProjectCard }) {
         <p className="font-display text-[15px] leading-relaxed text-fg-secondary">
           {project.description}
         </p>
-        <div className="flex gap-2 pt-1">
+        <div className="flex flex-wrap gap-2 pt-1">
           {project.tags.map((tag) => (
             <span
               key={tag}
@@ -377,12 +382,9 @@ function ProjectCardComponent({ project }: { project: ProjectCard }) {
   )
 }
 
-/* ── Timeline Component ── */
+/* ── Timeline Component (#4 — responsive grid, no overflow) ── */
 
 function TimelineComponent({ articles }: { articles: TimelineArticle[] }) {
-  const row1 = articles.slice(0, 4)
-  const row2 = articles.slice(4, 8)
-
   return (
     <>
       {/* ── Mobile: vertical timeline (<md) ── */}
@@ -405,67 +407,18 @@ function TimelineComponent({ articles }: { articles: TimelineArticle[] }) {
         </div>
       </div>
 
-      {/* ── Tablet: 2-col grid (md to xl) ── */}
-      <div className="hidden md:grid md:grid-cols-2 md:gap-4 xl:hidden">
+      {/* ── Tablet + Desktop: responsive grid (md+) ── */}
+      <div className="hidden md:grid md:grid-cols-2 md:gap-4 xl:grid-cols-3 2xl:grid-cols-4">
         {articles.map((article) => (
           <TimelineCard key={article.slug} article={article} />
         ))}
         <ViewAllButton />
       </div>
-
-      {/* ── Desktop: horizontal 2-row snake (xl+) ── */}
-      <div className="hidden xl:flex xl:flex-col xl:gap-0">
-        {/* Row 1 */}
-        <div className="flex items-center pb-4">
-          {row1.map((article, i) => (
-            <div key={article.slug} className="flex items-center">
-              {i > 0 && (
-                <div className="h-0.5 w-[68px] shrink-0 bg-accent" />
-              )}
-              <TimelineCard article={article} />
-            </div>
-          ))}
-        </div>
-
-        {/* Wrap Connector — uses full width instead of hardcoded value */}
-        <div className="relative h-[54px] w-full">
-          {/* Right vertical — drops down from end of Row 1 */}
-          <div
-            className="absolute right-0 top-0 bg-accent"
-            style={{ width: 3, height: 30 }}
-          />
-          {/* Horizontal — spans full width at mid-height */}
-          <div
-            className="absolute inset-x-0 bg-accent"
-            style={{ height: 3, top: 27 }}
-          />
-          {/* Left vertical — rises up to Row 2 start */}
-          <div
-            className="absolute left-0 bg-accent"
-            style={{ width: 3, height: 24, top: 27 }}
-          />
-        </div>
-
-        {/* Row 2 */}
-        <div className="flex items-center">
-          {row2.map((article, i) => (
-            <div key={article.slug} className="flex items-center">
-              {i > 0 && (
-                <div className="h-0.5 w-[68px] shrink-0 bg-accent" />
-              )}
-              <TimelineCard article={article} />
-            </div>
-          ))}
-          {/* View All connector + button */}
-          <div className="h-0.5 w-[68px] shrink-0 bg-accent" />
-          <ViewAllButton />
-        </div>
-      </div>
     </>
   )
 }
 
-/* ── Timeline Card (Neo-Brutalist) ── */
+/* ── Timeline Card (Neo-Brutalist) — #3 corner ticks removed ── */
 
 function TimelineCard({
   article,
@@ -480,13 +433,8 @@ function TimelineCard({
       params={{ postSlug: article.slug }}
       className={`timeline-card group relative shrink-0 ${isMobile === true ? "w-full" : "w-[280px]"}`}
     >
-      {/* Neo-brutalist shadow (behind, offset) */}
+      {/* Neo-brutalist shadow (behind, offset — animates in on hover) */}
       <div className="neo-shadow neo-scanlines rounded-none" />
-
-      {/* Corner ticks */}
-      <span className="corner-tick tr" />
-      <span className="corner-tick bl" />
-      <span className="corner-tick br" />
 
       {/* Main card */}
       <div className="relative overflow-hidden border-[3px] border-accent bg-[#0A0A0A]">
@@ -520,16 +468,11 @@ function ViewAllButton({ isMobile }: { isMobile?: boolean }) {
       to="/blog"
       className={`timeline-card group relative shrink-0 ${isMobile === true ? "w-full" : "w-[170px]"}`}
     >
-      {/* Neo shadow */}
+      {/* Neo shadow — animates in on hover */}
       <div
         className="neo-shadow neo-scanlines rounded-none"
         style={{ height: 44 }}
       />
-
-      {/* Corner ticks */}
-      <span className="corner-tick tr" />
-      <span className="corner-tick bl" />
-      <span className="corner-tick br" />
 
       {/* Button */}
       <div className="relative flex h-[44px] items-center justify-center border-[3px] border-accent bg-bg-surface transition-colors group-hover:bg-accent/10">
