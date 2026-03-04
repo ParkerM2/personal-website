@@ -384,10 +384,39 @@ function TimelineComponent({ articles }: { articles: TimelineArticle[] }) {
   const row2 = articles.slice(4, 8)
 
   return (
-    <div className="flex flex-col gap-0">
-      {/* Row 1 — scrollable */}
-      <div className="-mx-4 overflow-x-auto px-4 pb-4 sm:-mx-6 sm:px-6">
-        <div className="flex w-max items-center">
+    <>
+      {/* ── Mobile: vertical timeline (<md) ── */}
+      <div className="flex flex-col md:hidden">
+        <div className="relative flex flex-col gap-4 pl-6">
+          {/* Vertical connecting line */}
+          <div className="absolute bottom-0 left-[5px] top-0 w-0.5 bg-accent" />
+          {articles.map((article) => (
+            <div key={article.slug} className="relative flex items-start">
+              {/* Dot on the line */}
+              <div className="absolute -left-6 top-4 h-2.5 w-2.5 rounded-full border-2 border-accent bg-bg" />
+              <TimelineCard article={article} isMobile />
+            </div>
+          ))}
+          {/* View All at the end */}
+          <div className="relative flex items-start">
+            <div className="absolute -left-6 top-3 h-2.5 w-2.5 rounded-full border-2 border-accent bg-accent" />
+            <ViewAllButton isMobile />
+          </div>
+        </div>
+      </div>
+
+      {/* ── Tablet: 2-col grid (md to xl) ── */}
+      <div className="hidden md:grid md:grid-cols-2 md:gap-4 xl:hidden">
+        {articles.map((article) => (
+          <TimelineCard key={article.slug} article={article} />
+        ))}
+        <ViewAllButton />
+      </div>
+
+      {/* ── Desktop: horizontal 2-row snake (xl+) ── */}
+      <div className="hidden xl:flex xl:flex-col xl:gap-0">
+        {/* Row 1 */}
+        <div className="flex items-center pb-4">
           {row1.map((article, i) => (
             <div key={article.slug} className="flex items-center">
               {i > 0 && (
@@ -397,32 +426,28 @@ function TimelineComponent({ articles }: { articles: TimelineArticle[] }) {
             </div>
           ))}
         </div>
-      </div>
 
-      {/* Wrap Connector: connects end of row1 to start of row2 */}
-      <div className="-mx-4 overflow-x-auto px-4 sm:-mx-6 sm:px-6">
-        <div className="relative" style={{ width: 1324, height: 54 }}>
+        {/* Wrap Connector — uses full width instead of hardcoded value */}
+        <div className="relative h-[54px] w-full">
           {/* Right vertical — drops down from end of Row 1 */}
           <div
-            className="absolute bg-accent"
-            style={{ width: 3, height: 30, right: 0, top: 0 }}
+            className="absolute right-0 top-0 bg-accent"
+            style={{ width: 3, height: 30 }}
           />
           {/* Horizontal — spans full width at mid-height */}
           <div
-            className="absolute bg-accent"
-            style={{ height: 3, left: 0, right: 0, top: 27 }}
+            className="absolute inset-x-0 bg-accent"
+            style={{ height: 3, top: 27 }}
           />
           {/* Left vertical — rises up to Row 2 start */}
           <div
-            className="absolute bg-accent"
-            style={{ width: 3, height: 24, left: 0, top: 27 }}
+            className="absolute left-0 bg-accent"
+            style={{ width: 3, height: 24, top: 27 }}
           />
         </div>
-      </div>
 
-      {/* Row 2 — scrollable */}
-      <div className="-mx-4 overflow-x-auto px-4 pt-0 sm:-mx-6 sm:px-6">
-        <div className="flex w-max items-center">
+        {/* Row 2 */}
+        <div className="flex items-center">
           {row2.map((article, i) => (
             <div key={article.slug} className="flex items-center">
               {i > 0 && (
@@ -431,24 +456,29 @@ function TimelineComponent({ articles }: { articles: TimelineArticle[] }) {
               <TimelineCard article={article} />
             </div>
           ))}
-
-          {/* View All button connector + button */}
+          {/* View All connector + button */}
           <div className="h-0.5 w-[68px] shrink-0 bg-accent" />
           <ViewAllButton />
         </div>
       </div>
-    </div>
+    </>
   )
 }
 
 /* ── Timeline Card (Neo-Brutalist) ── */
 
-function TimelineCard({ article }: { article: TimelineArticle }) {
+function TimelineCard({
+  article,
+  isMobile,
+}: {
+  article: TimelineArticle
+  isMobile?: boolean
+}) {
   return (
     <Link
       to="/blog/$postSlug"
       params={{ postSlug: article.slug }}
-      className="timeline-card group relative w-[280px] shrink-0"
+      className={`timeline-card group relative shrink-0 ${isMobile === true ? "w-full" : "w-[280px]"}`}
     >
       {/* Neo-brutalist shadow (behind, offset) */}
       <div className="neo-shadow neo-scanlines rounded-none" />
@@ -484,11 +514,11 @@ function TimelineCard({ article }: { article: TimelineArticle }) {
 
 /* ── View All Button (Neo-Brutalist) ── */
 
-function ViewAllButton() {
+function ViewAllButton({ isMobile }: { isMobile?: boolean }) {
   return (
     <Link
       to="/blog"
-      className="timeline-card group relative w-[170px] shrink-0"
+      className={`timeline-card group relative shrink-0 ${isMobile === true ? "w-full" : "w-[170px]"}`}
     >
       {/* Neo shadow */}
       <div

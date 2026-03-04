@@ -123,11 +123,13 @@
 /* Timeline hover card effect */
 .timeline-card {
   position: relative;
+  isolation: isolate; /* creates stacking context so z-index:-1 stays visible */
 }
 
 .timeline-card .neo-shadow {
   position: absolute;
   inset: 0;
+  z-index: -1; /* renders BEHIND card content, not on top */
   transform: translate(8px, 10px);
   border: 3px solid var(--accent);
   pointer-events: none;
