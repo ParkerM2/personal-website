@@ -7,7 +7,9 @@
 
 [build.environment]
   NODE_VERSION = "22"
-  NODE_ENV = "production"
+  # NODE_ENV intentionally NOT set to "production" here —
+  # setting it causes npm ci to skip devDependencies (typescript, vite, etc.)
+  # Vite already builds in production mode by default
 
 # Deploy context overrides
 [context.production]
